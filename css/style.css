@@ -1,0 +1,28 @@
+.side-area{
+  background-color:#0a3d62;
+  color:#ffffff;
+}
+/* h1,h2,h3,h4,h5,h6{
+  padding: 20px 10px;
+} */
+
+.nav-pills .nav-link.active{
+  background-color: #45aaf2;
+}
+
+.nav-pills .nav-link:hover{
+  background-color: #1abc9c;
+  color: #ffffff;
+}
+
+.nav-link{
+  color: #ffffff;
+}
+
+form .labeltxt{
+  padding-left: 40px;
+}
+
+footer p{
+  color: #cccccc;
+}
