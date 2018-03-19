@@ -1,3 +1,46 @@
+<?php require_once("includes/dbconnect.php"); ?>
+<?php require_once("includes/session.php"); ?>
+<?php require_once("includes/functions.php"); ?>
+<?php
+if(isset($_POST["Submit"])){
+  $CategoryName = mysqli_real_escape_string($conn, $_POST["Category"]);
+  date_default_timezone_set("Asia/Dubai");
+  $Currenttime = time();
+  $Datetime = strftime("%B - %d, %Y %H : %M : %S", $Currenttime);
+  $Datetime;
+
+  $Admin = "Fahmida Dilnaz";
+
+if(empty($CategoryName)){
+
+  $_SESSION["ErrorMessage"] = "All fields must be filled out.";
+  redirect_to("categories.php");
+}
+
+elseif(strlen($CategoryName)>99){
+  $_SESSION["ErrorMessage"] = "Too long name for category";
+  redirect_to("categories.php");
+  }
+
+  else{
+
+    $query = "INSERT INTO categories(datetime,categoryname,creatorname) VALUES ('$Datetime', '$CategoryName', '$Admin')";
+
+    $result = mysqli_query($conn, $query);
+
+    if($result){
+      $_SESSION["successMessage"] = "Category Added Successfully!";
+      redirect_to("categories.php");
+    }
+    else{
+      $_SESSION["ErrorMessage"] = "Category Failed to Add.";
+      redirect_to("categories.php");
+    }
+
+
+  }
+
+} ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +56,7 @@
       <div class="row">
         <div class="col-3 side-area">
             <h4 class="py-4 text-center">
-              <i class="fas fa-user-secret"></i>
+              <i class="fas fa-user"></i>
                <a href="index.php"> Admin Panel</a>
             </h4>
             <nav class="nav flex-column nav-pills">
@@ -27,11 +70,14 @@
         </div>
         <div class="col-9 main-content">
             <h3 class="p-4">Manage Categories</h3>
-            <form class="form" action="insert.php" method="POST">
+            <?php echo errorMessage();
+                  echo successMessage();
+            ?>
+            <form class="form" action="categories.php" method="post">
               <div class="form-group row">
                   <label for="categoryName" class="col-sm-3 col-form-label labeltxt ">Category Name: </label>
                 <div class="col-sm-7">
-                  <input class="form-control" type="text" name="Ename" id="categoryName" placeholder="Category Name">
+                  <input class="form-control" type="text" name="Category" id="categoryName" placeholder="Category Name">
                 </div>
                 <div class="col-sm-2">
                     <input type="submit" name="Submit" value="Add Category" class="btn btn-success">

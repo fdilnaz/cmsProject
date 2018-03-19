@@ -13,8 +13,7 @@
       <div class="row">
         <div class="col-3 side-area">
             <h4 class="py-4 text-center">
-              <i class="fas fa-user-secret"></i>
-               <a href="index.php"> Admin Panel</a>
+               <i class="fas fa-user"></i><a href="index.php"> Admin Panel</a>
             </h4>
             <nav class="nav flex-column nav-pills">
               <a class="nav-link active my-2" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
