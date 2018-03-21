@@ -18,7 +18,7 @@
             <nav class="nav flex-column nav-pills">
               <a class="nav-link active my-2" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
               <a class="nav-link my-2" href="categories.php"><i class="fas fa-compress"></i> Categories</a>
-              <a class="nav-link my-2" href="#"><i class="fas fa-plus"></i> Add New Post</a>
+              <a class="nav-link my-2" href="add_new_post.php"><i class="fas fa-plus"></i> Add New Post</a>
               <a class="nav-link my-2" href="#"><i class="fas fa-unlock-alt"></i> Manage Admins</a>
               <a class="nav-link my-2" href="#"><i class="fas fa-th-list"></i> Live Blog</a>
               <a class="nav-link my-2" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>

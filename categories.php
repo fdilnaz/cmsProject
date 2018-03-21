@@ -62,28 +62,61 @@ elseif(strlen($CategoryName)>99){
             <nav class="nav flex-column nav-pills">
               <a class="nav-link my-2" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
               <a class="nav-link active my-2" href="categories.php"><i class="fas fa-compress"></i> Categories</a>
-              <a class="nav-link my-2" href="#"><i class="fas fa-plus"></i> Add New Post</a>
+              <a class="nav-link my-2" href="add_new_post.php"><i class="fas fa-plus"></i> Add New Post</a>
               <a class="nav-link my-2" href="#"><i class="fas fa-unlock-alt"></i> Manage Admins</a>
               <a class="nav-link my-2" href="#"><i class="fas fa-th-list"></i> Live Blog</a>
               <a class="nav-link my-2" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </div>
         <div class="col-9 main-content">
-            <h3 class="p-4">Manage Categories</h3>
+            <h3 class="py-4">Manage Categories</h3>
             <?php echo errorMessage();
                   echo successMessage();
             ?>
             <form class="form" action="categories.php" method="post">
               <div class="form-group row">
-                  <label for="categoryName" class="col-sm-3 col-form-label labeltxt ">Category Name: </label>
+                  <label for="categoryName" class="col-sm-2 col-form-label">Category Name: </label>
                 <div class="col-sm-7">
                   <input class="form-control" type="text" name="Category" id="categoryName" placeholder="Category Name">
                 </div>
-                <div class="col-sm-2">
-                    <input type="submit" name="Submit" value="Add Category" class="btn btn-success">
+                <div class="col-sm-3">
+                    <input type="submit" name="Submit" value="Add New Category" class="btn btn-success">
                 </div>
               </div>
             </form>
+            <div class="table-responsive">
+              <h3 class="py-4 text-center">Categories List</h3>
+              <table class="table table-striped table-hover">
+                <tr class="table-primary">
+                  <th scope="col">Sr.No:</th>
+                  <th scope="col">Date and Time</th>
+                  <th scope="col">Category Name</th>
+                  <th scope="col">Creator Name</th>
+                </tr>
+                <?php
+
+                $viewQuery = "SELECT * FROM categories ORDER BY datetime desc";
+
+                $execute = mysqli_query($conn, $viewQuery);
+                $SrNo = 0;
+                while ($Datarows = mysqli_fetch_array($execute)) {
+                  $ID = $Datarows["id"];
+                  $DateTime = $Datarows["datetime"];
+                  $CategoryName = $Datarows["categoryname"];
+                  $CreatorName = $Datarows["creatorname"];
+                  $SrNo++;
+                 ?>
+                 <tr>
+                   <td><?php echo $SrNo; ?></td>
+                   <td><?php echo $DateTime;?></td>
+                   <td><?php echo $CategoryName;?></td>
+                   <td><?php echo $CreatorName; ?></td>
+                 </tr>
+  <?php } ?>
+
+
+              </table>
+            </div>
         </div>
       </div>
     </div>
