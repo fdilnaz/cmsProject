@@ -14,8 +14,48 @@ if(isset($_POST["Submit"])){
 
   $Admin = "Fahmida Dilnaz";
 
-  $Image = $_FILES["imageFile"]["name"];
-  $Target = "upload/".$Image;
+  $Target = "upload_images/";
+  $Image = $Target.basename($_FILES["imageFile"]["name"]);
+  //$uploadOk = 1;
+  //$imageFileType = strtolower(pathinfo($Image, PATHINFO_EXTENSION));
+  // // Check if image file is a actual image or fake image
+  // if(isset($_POST["Submit"])) {
+  //   $check = getimagesize($_FILES["imageFile"]["tmp_name"]);
+  //   if($check !== false) {
+  //       echo "File is an image - " . $check["mime"] . ".";
+  //       $uploadOk = 1;
+  //   } else {
+  //       echo "File is not an image.";
+  //       $uploadOk = 0;
+  //   }
+  // }
+  // // Check if file already exists
+  // if (file_exists($Image)) {
+  //   echo "Sorry, file already exists.";
+  //   $uploadOk = 0;
+  // }
+  // // Check file size
+  // if ($_FILES["imageFile"]["size"] > 500000) {
+  //   echo "Sorry, your file is too large.";
+  //   $uploadOk = 0;
+  // }
+  // // Allow certain file formats
+  // if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+  // && $imageFileType != "gif" ) {
+  //   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+  //   $uploadOk = 0;
+  // }
+  // // Check if $uploadOk is set to 0 by an error
+  // if ($uploadOk == 0) {
+  //   echo "Sorry, your file was not uploaded.";
+  // // if everything is ok, try to upload file
+  // } else {
+  //   if (move_uploaded_file($_FILES["imageFile"]["tmp_name"], $Image)) {
+  //       echo "The file ". basename( $_FILES["imageFile"]["name"]). " has been uploaded.";
+  //   } else {
+  //       echo "Sorry, there was an error uploading your file.";
+  //   }
+  // }
 
 if(empty($Title)){
 
@@ -34,9 +74,8 @@ elseif(strlen($Title)<3){
 
     $result = mysqli_query($conn, $query);
 
-    move_uploaded_file($_FILES["imageFile"]["tmp_name"], $Target);
-
-
+    move_uploaded_file($_FILES["imageFile"]["tmp_name"], $Image);
+    
     if($result){
       $_SESSION["successMessage"] = "Your Post Added Successfully!";
       redirect_to("add_new_post.php");
@@ -45,8 +84,6 @@ elseif(strlen($Title)<3){
       $_SESSION["ErrorMessage"] = "Post Failed to Add.";
       redirect_to("add_new_post.php");
     }
-
-
   }
 
 } ?>
@@ -94,7 +131,7 @@ elseif(strlen($Title)<3){
                 <div class="col-sm-10">
                   <select class="form-control" id="selectCategory" name="selectCategory">
                     <?php
-
+                      global $conn;
                       $viewQuery = "SELECT * FROM categories ORDER BY datetime desc";
                       $execute = mysqli_query($conn, $viewQuery);
 
@@ -135,9 +172,7 @@ elseif(strlen($Title)<3){
 
     </footer>
 
-
-
-    <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="js/bootstrap.min.js"></script>
   </body>

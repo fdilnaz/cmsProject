@@ -28,6 +28,16 @@ a, a:hover{
   padding-left: 40px;
 } */
 
+.blog-contant{
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+}
+
+.btn-info{
+  float: right;
+}
+
 footer p{
   color: #cccccc;
 }
